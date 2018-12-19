@@ -12,12 +12,12 @@ class AnagramSolver
 
   private
 
-  def self.same_length?(first_word, second_word)
-    first_word.length == second_word.length
+  def self.same_length?(sample_word, word)
+    sample_word.length == word.length
   end
 
-  def self.is_anagram?(first_word, second_word)
-    sorted(first_word) == sorted(second_word)
+  def self.is_anagram?(sample_word, word)
+    sorted(sample_word) == sorted(word)
   end
 
   def self.sorted(word)
