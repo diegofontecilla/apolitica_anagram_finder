@@ -1,22 +1,27 @@
 require 'anagram_solver'
 
 describe AnagramSolver do
-  before do
-    $stdin = StringIO.new("care\n")
-  end
 
-  after do
-    $stdin = STDIN
-  end
+  let(:subject) { AnagramSolver }
+  let(:word_array) { ['tapes', 'peats', 'orange', 'pates'] }
+  let(:positive_sample_word) { 'paste' }
+  let(:negative_sample_word) { 'zero' }
 
-  let(:fake_file) { double(:file) }
-  let(:fake_file_formatter) { double(:file_formatter, get_list_of_words: nil) }
-  subject(:anagram_solver) { AnagramSolver.new(fake_file_formatter) }
+  describe '#find_anagrams' do
 
-  context '#anagrammer' do
-    it 'runs printer method with nil' do
-      anagram_solver.anagrammer(fake_file)
-      expect(anagram_solver.printer(nil)).to output("Please insert a word:\n").to_stdout
+    context 'there are no anagrams' do
+      it 'returns an empty array' do
+        result = subject.find_anagrams(negative_sample_word, word_array)
+        expect(result).to eq []
+      end
+    end
+
+    context 'there are anagrams' do
+      it 'returns an array of found anagrams' do
+        result = subject.find_anagrams(positive_sample_word, word_array)
+        expect(result.sort).to eq ['pates', 'peats', 'tapes']
+      end
     end
   end
+
 end
